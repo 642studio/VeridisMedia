@@ -56,19 +56,28 @@ function seedState(): BroadcastState {
 
 async function readStore(): Promise<BroadcastState | null> {
   if (KV_ENABLED) {
-    const { kv } = await import("@vercel/kv");
-    return (await kv.get<BroadcastState>(KEY)) ?? null;
+    try {
+      const { kv } = await import("@vercel/kv");
+      return (await kv.get<BroadcastState>(KEY)) ?? null;
+    } catch (e) {
+      // KV mal configurado / no disponible → no tumbar la página.
+      console.error("[broadcast-state] KV read falló, usando memoria:", e);
+    }
   }
   return globalStore.__veridisBroadcast ?? null;
 }
 
 async function writeStore(state: BroadcastState): Promise<void> {
   if (KV_ENABLED) {
-    const { kv } = await import("@vercel/kv");
-    await kv.set(KEY, state);
-  } else {
-    globalStore.__veridisBroadcast = state;
+    try {
+      const { kv } = await import("@vercel/kv");
+      await kv.set(KEY, state);
+      return;
+    } catch (e) {
+      console.error("[broadcast-state] KV write falló, usando memoria:", e);
+    }
   }
+  globalStore.__veridisBroadcast = state;
 }
 
 /** Lee el estado actual. Lectura barata (KV get o memoria); las páginas que lo
