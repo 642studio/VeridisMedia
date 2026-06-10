@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   VERIDIS MEDIA — Design tokens
+   "Signal tech" system: deep blue-black canvas, electric cyan → violet → magenta
+   accents drawn from the brand logo. Deliberately NOT green.
+   ========================================================================= */
+@theme {
+  /* Text & accents */
+  --color-phosphor: #dde7ff; /* primary text on dark — pale lavender-white */
+  --color-reactor: #7b61ff; /* electric violet — primary action / focus */
+  --color-cyan: #22d3ee; /* electric cyan — live states, glow, accents */
+  --color-soft-glow: #b9c4ff; /* diluted violet — highlighted text/surfaces */
+  --color-pale-mist: #e7ecff; /* inverted light section background */
+  --color-sage-tint: #8fb3d6; /* muted cyan accent, dimmed states */
+
+  /* Brand gradient stops (logo) */
+  --color-brand-cyan: #22d3ee;
+  --color-brand-violet: #7b61ff;
+  --color-brand-magenta: #c948e6;
+
+  /* Broadcast signal red — ON AIR only (iconic) */
+  --color-onair: #ff3b5c;
+
+  /* Surfaces & neutrals — blue/indigo-tinted, never plain gray */
+  --color-void: #05060d;
+  --color-carbon: #11131f;
+  --color-moss: #1b2036;
+  --color-fern: #2a3052;
+  --color-lichen: #717ba8;
+  --color-slate: #767fab;
+  --color-stone: #8a93bd;
+  --color-bone: #ffffff;
+
+  /* Fonts */
+  --font-goga: var(--font-display), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inter-variable: var(--font-inter), ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Type scale */
+  --text-caption: 12px;
+  --text-caption--line-height: 1.33;
+  --text-caption--letter-spacing: -0.31px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.38;
+  --text-body-sm--letter-spacing: -0.31px;
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: -0.35px;
+  --text-subheading: 20px;
+  --text-subheading--line-height: 1.5;
+  --text-subheading--letter-spacing: -0.12px;
+  --text-heading-sm: 24px;
+  --text-heading-sm--line-height: 1.4;
+  --text-heading-sm--letter-spacing: -0.36px;
+  --text-heading: 40px;
+  --text-heading--line-height: 1.3;
+  --text-heading--letter-spacing: -0.6px;
+  --text-heading-lg: 54px;
+  --text-heading-lg--line-height: 1.2;
+  --text-heading-lg--letter-spacing: -0.81px;
+  --text-display: 64px;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.96px;
+
+  /* Spacing base unit */
+  --spacing: 4px;
+
+  /* Border radius */
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --container-page: 1200px;
+
+  /* Shadows */
+  --shadow-md: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
+}
+
+/* ============================================================================
+   Base
+   ========================================================================= */
+* {
+  box-sizing: border-box;
+  border-color: var(--color-fern);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-phosphor);
+  font-family: var(--font-inter-variable);
+  font-feature-settings: "cv11" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-reactor);
+  color: var(--color-bone);
+}
+
+.font-display {
+  font-family: var(--font-goga);
+  font-feature-settings: "ss01" on;
+}
+
+/* Brand gradient text helper */
+.brand-gradient-text {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand-cyan) 0%,
+    var(--color-brand-violet) 55%,
+    var(--color-brand-magenta) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Centered page container */
+.container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ============================================================================
+   CRT / broadcast utilities — HERO ONLY (cool signal exception)
+   ========================================================================= */
+
+/* Phosphor glow — cyan core fading to violet (the brand glow) */
+.phosphor-glow {
+  text-shadow: 0 0 1px rgba(34, 211, 238, 0.55),
+    0 0 8px rgba(34, 211, 238, 0.45), 0 0 22px rgba(124, 97, 255, 0.32);
+}
+
+/* Scanlines overlay — apply to a positioned element */
+.crt-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.28) 3px,
+    rgba(0, 0, 0, 0.28) 4px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+  z-index: 5;
+}
+
+/* Subtle screen flicker */
+@keyframes crt-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.82;
+  }
+  94% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.9;
+  }
+  97% {
+    opacity: 1;
+  }
+}
+
+.crt-flicker {
+  animation: crt-flicker 6s infinite steps(1);
+}
+
+/* Glitch text — RGB-split (magenta + cyan, the brand chromatic aberration) */
+@keyframes crt-glitch {
+  0%,
+  100% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  20% {
+    transform: translate(-2px, 1px);
+    clip-path: inset(20% 0 40% 0);
+  }
+  40% {
+    transform: translate(2px, -1px);
+    clip-path: inset(60% 0 10% 0);
+  }
+  60% {
+    transform: translate(-1px, 0);
+    clip-path: inset(10% 0 70% 0);
+  }
+  80% {
+    transform: translate(1px, 1px);
+    clip-path: inset(40% 0 30% 0);
+  }
+}
+
+.crt-glitch {
+  position: relative;
+}
+
+.crt-glitch::before,
+.crt-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.crt-glitch::before {
+  color: #ff2d9b; /* magenta */
+  animation: crt-glitch 2.4s infinite linear alternate;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+.crt-glitch::after {
+  color: var(--color-cyan); /* cyan */
+  animation: crt-glitch 3.1s infinite linear alternate-reverse;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+/* ON AIR pulse (broadcast red) */
+@keyframes on-air-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.6);
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 6px rgba(255, 59, 92, 0);
+  }
+}
+
+.on-air-pulse {
+  animation: on-air-pulse 1.6s infinite ease-in-out;
+}
+
+/* LIVE dot pulse (cyan, used across dark UI) */
+@keyframes live-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+.live-dot {
+  animation: live-dot 1.4s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-flicker,
+  .crt-glitch::before,
+  .crt-glitch::after,
+  .on-air-pulse,
+  .live-dot {
+    animation: none;
+  }
+}
