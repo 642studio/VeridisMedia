@@ -6,7 +6,7 @@
  *   node --env-file=.env.local scripts/cloudflare-setup.mjs
  *
  * Requiere: CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN.
- * Opcional: SITE_URL (default https://veridismedia.com) para el webhook.
+ * Opcional: SITE_URL (default https://veridismedia.mx) para el webhook.
  *
  * Es idempotente: reutiliza el live input llamado INPUT_NAME en vez de duplicar.
  * El webhook es no-fatal: si la URL aún no responde (sitio sin desplegar), avisa y
@@ -16,7 +16,7 @@ const API = "https://api.cloudflare.com/client/v4";
 const INPUT_NAME = "VERIDIS MEDIA — Canal principal";
 const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 const token = process.env.CLOUDFLARE_API_TOKEN;
-const siteUrl = (process.env.SITE_URL || "https://veridismedia.com").replace(/\/$/, "");
+const siteUrl = (process.env.SITE_URL || "https://veridismedia.mx").replace(/\/$/, "");
 
 if (!accountId || !token) {
   console.error("✗ Falta CLOUDFLARE_ACCOUNT_ID o CLOUDFLARE_API_TOKEN en el entorno.");

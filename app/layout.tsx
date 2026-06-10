@@ -20,7 +20,7 @@ const display = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://veridismedia.com"),
+  metadataBase: new URL("https://veridismedia.mx"),
   title: {
     default: "VERIDIS MEDIA — Streaming, cobertura y difusión en vivo",
     template: "%s · VERIDIS MEDIA",

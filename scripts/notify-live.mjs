@@ -4,7 +4,7 @@
  *
  *   npm run go-live                 → envía (usa http://localhost:3000)
  *   npm run go-live -- --dry        → solo muestra el payload, no envía
- *   npm run go-live -- https://veridismedia.com   → contra producción
+ *   npm run go-live -- https://veridismedia.mx   → contra producción
  *
  * Variables: SITE_URL (base), LIVE_WEBHOOK_SECRET (si la API lo exige).
  */

@@ -40,7 +40,7 @@ export const siteConfig: SiteConfig = {
 
   contact: {
     whatsapp: "+52 642 000 0000",
-    email: "hola@veridismedia.com",
+    email: "hola@veridismedia.mx",
     city: "Navojoa, Sonora",
   },
 };

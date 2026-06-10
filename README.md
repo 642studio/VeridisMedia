@@ -65,7 +65,7 @@ automatización de notificaciones (WhatsApp/SMS). Configuración en `.env.local`
 ```bash
 npm run go-live:dry     # vista previa del payload, no envía
 npm run go-live         # envía el webhook (local)
-npm run go-live -- https://veridismedia.com   # contra producción
+npm run go-live -- https://veridismedia.mx   # contra producción
 ```
 
 También puedes llamar el endpoint directamente (para botón, celular, Zapier, etc.):
@@ -94,10 +94,11 @@ Diseñado para migrar a un CMS (Sanity/Payload) en Fase 2 sin cambiar los compon
 
 ## Diseño
 
-Sistema "phosphor terminal" (negro + verde fósforo) definido en
-[`app/globals.css`](app/globals.css) como tokens `@theme` de Tailwind v4.
-El **hero** es la única excepción cálida (CRT/broadcast). Tipografías: Inter (UI) +
-Space Grotesk como sustituto gratuito de la fuente de pago *Goga* (variable `--font-goga`).
+Sistema "signal tech" (azul-negro + cian/violeta/magenta, derivado del logo) definido en
+[`app/globals.css`](app/globals.css) como tokens `@theme` de Tailwind v4 — deliberadamente
+NO verde. El **hero** es la escena CRT/broadcast en frío (cian fósforo + ambiente violeta).
+Tipografías: Inter (UI) + Space Grotesk como sustituto gratuito de la fuente de pago *Goga*
+(variable `--font-goga`).
 
 ### Asset pendiente
 

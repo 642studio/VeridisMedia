@@ -10,7 +10,7 @@ import type { BroadcastState } from "@/lib/broadcast-state";
    La URL y el secreto se configuran por variables de entorno (ver .env.example).
    ========================================================================= */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://veridismedia.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://veridismedia.mx";
 
 export interface LiveWebhookOverrides {
   /** Sobrescribe el título del stream (si no, usa config). */
