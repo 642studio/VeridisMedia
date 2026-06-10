@@ -93,6 +93,16 @@ export async function getLiveInput(uid: string): Promise<LiveInput> {
   return cf<LiveInput>(`/stream/live_inputs/${uid}`);
 }
 
+/** Estado de conexión real del live input ("connected" | "disconnected" | ...). */
+export async function getLiveInputState(
+  uid: string = streamConfig.liveInputUid,
+): Promise<string> {
+  const input = await cf<{ status?: { current?: { state?: string } } }>(
+    `/stream/live_inputs/${uid}`,
+  );
+  return input.status?.current?.state ?? "unknown";
+}
+
 /** Configura la URL de notificaciones de Stream; devuelve el secreto de firma. */
 export async function setStreamWebhook(
   notificationUrl: string,
