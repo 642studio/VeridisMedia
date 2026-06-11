@@ -3,32 +3,29 @@ import type { SiteConfig } from "@/lib/types";
 /* ============================================================================
    VERIDIS MEDIA — Configuración global del sitio
    ----------------------------------------------------------------------------
-   ⚡ TOGGLE LIVE/OFFLINE (Fase 1):
-   Cambia `broadcastStatus` entre "OFFLINE" y "LIVE" para alternar el estado
-   del hero del Home y de la página /live. Cuando esté en "LIVE", asegúrate de
-   que `currentStream.streamUrl` apunte al embed correcto (YouTube/Facebook).
+   El estado LIVE/OFFLINE ahora se maneja en runtime (panel /admin + Cloudflare).
+   Estos valores son la SEMILLA inicial + los datos fijos (redes, contacto).
    ========================================================================= */
 
 export const siteConfig: SiteConfig = {
   broadcastStatus: "OFFLINE",
 
   currentStream: {
-    title: "Festival Cultural Navojoa 2025 — Noche de apertura",
-    slug: "festival-cultural-navojoa-2025-apertura",
-    eventId: "festival-cultural-navojoa-2025",
+    title: "Feria MayoMusic Navojoa 2026",
+    slug: "feria-mayomusic-navojoa-2026",
+    eventId: "feria-mayomusic-navojoa-2026",
     status: "OFFLINE",
-    // Ejemplo de embed de YouTube. Reemplaza VIDEO_ID por la transmisión real.
-    streamUrl: "https://www.youtube.com/embed/live_stream?channel=UC_xxxxxxxx",
-    platform: "youtube",
+    streamUrl: "",
+    platform: "custom",
     description:
-      "Cobertura en vivo de la noche de apertura: música, cultura y entrevistas desde el corazón de Navojoa, Sonora.",
+      "Cobertura en vivo de la Feria MayoMusic Navojoa 2026: música, espectáculos y ambiente desde el recinto ferial.",
     chatEnabled: false,
   },
 
   nextBroadcast: {
-    name: "Festival Cultural Navojoa 2025",
-    date: "Sábado 21 de junio · 8:00 PM",
-    eventSlug: "festival-cultural-navojoa-2025",
+    name: "Feria MayoMusic Navojoa 2026",
+    date: "Cobertura diaria · hasta el domingo 14 de junio",
+    eventSlug: "feria-mayomusic-navojoa-2026",
   },
 
   social: {
@@ -39,8 +36,8 @@ export const siteConfig: SiteConfig = {
   },
 
   contact: {
-    whatsapp: "+52 642 000 0000",
-    email: "hola@veridismedia.mx",
+    whatsapp: "+52 642 121 5327",
+    email: "contacto@veridismedia.mx",
     city: "Navojoa, Sonora",
   },
 };

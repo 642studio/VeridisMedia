@@ -5,6 +5,18 @@ import type { VeridisEvent } from "@/lib/types";
    placeholders. Edita o agrega eventos aquí. */
 export const events: VeridisEvent[] = [
   {
+    title: "Feria MayoMusic Navojoa 2026",
+    slug: "feria-mayomusic-navojoa-2026",
+    description:
+      "Cobertura en vivo de la Feria MayoMusic Navojoa 2026: música, espectáculos, juegos y ambiente desde el recinto ferial. Transmisión diaria por VERIDIS MEDIA.",
+    city: "Navojoa, Sonora",
+    startDate: "2026-06-04",
+    endDate: "2026-06-14",
+    status: "en-vivo",
+    category: "musica",
+    gallery: [],
+  },
+  {
     title: "Festival Cultural Navojoa 2025",
     slug: "festival-cultural-navojoa-2025",
     description:

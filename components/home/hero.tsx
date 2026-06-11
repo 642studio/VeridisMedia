@@ -65,8 +65,8 @@ export async function Hero() {
             <div className="crt-scanlines crt-flicker relative overflow-hidden rounded-[12px] bg-black px-6 py-12 sm:px-12 sm:py-16">
               {/* Screen content */}
               <div className="relative z-10">
-                <div className="mb-5 flex justify-center [filter:drop-shadow(0_0_10px_rgba(34,211,238,0.45))]">
-                  <BrandMark size={64} id="hero" />
+                <div className="mb-5 flex justify-center [filter:drop-shadow(0_0_14px_rgba(34,211,238,0.5))]">
+                  <BrandMark size={76} variant="color" />
                 </div>
                 {isLive ? (
                   <p className="mb-4 inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.25em] text-cyan phosphor-glow">
