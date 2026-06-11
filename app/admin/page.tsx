@@ -3,7 +3,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { AdminDashboard } from "@/components/admin/admin-dashboard";
 import { getEffectiveBroadcastState } from "@/lib/live-detection";
 import { getAllEvents } from "@/lib/content";
-import { streamConfig } from "@/lib/cloudflare-stream";
+import { streamConfig, iframeUrl } from "@/lib/cloudflare-stream";
 
 export const metadata: Metadata = { title: "Admin", robots: { index: false } };
 export const dynamic = "force-dynamic";
@@ -16,6 +16,7 @@ export default async function AdminPage() {
     rtmpsUrl: streamConfig.rtmpsUrl,
     streamKey: streamConfig.streamKey,
     liveInputUid: streamConfig.liveInputUid,
+    playerUrl: streamConfig.configured ? iframeUrl(streamConfig.liveInputUid) : "",
   };
 
   return (

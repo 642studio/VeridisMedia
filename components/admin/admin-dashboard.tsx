@@ -15,6 +15,7 @@ interface StreamInfo {
   rtmpsUrl: string;
   streamKey: string;
   liveInputUid: string;
+  playerUrl: string;
 }
 
 export function AdminDashboard({
@@ -107,6 +108,35 @@ export function AdminDashboard({
         </button>
       </div>
 
+      {/* Monitor en vivo */}
+      <div className="rounded-[16px] border border-fern bg-carbon p-5">
+        <h2 className="text-[12px] font-medium uppercase tracking-[0.1em] text-lichen">
+          Monitor en vivo
+        </h2>
+        <div className="mt-4 overflow-hidden rounded-[12px] border border-fern bg-black">
+          {isLive && stream.playerUrl ? (
+            <iframe
+              src={stream.playerUrl}
+              title="Monitor en vivo"
+              className="aspect-video w-full"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <div className="flex aspect-video w-full items-center justify-center text-[13px] uppercase tracking-[0.15em] text-slate">
+              Sin señal — Offline
+            </div>
+          )}
+        </div>
+        <p className="mt-2 text-[12px] text-slate">
+          Es la misma señal que ven en{" "}
+          <a href="/live" target="_blank" className="text-lichen hover:text-reactor">
+            /live
+          </a>
+          . Puede tener unos segundos de retraso.
+        </p>
+      </div>
+
       {/* Metadata form */}
       <div className="rounded-[16px] border border-fern bg-carbon p-6">
         <h2 className="text-[12px] font-medium uppercase tracking-[0.1em] text-lichen">
@@ -161,10 +191,19 @@ export function AdminDashboard({
         <h2 className="text-[12px] font-medium uppercase tracking-[0.1em] text-lichen">
           Control de transmisión
         </h2>
-        <p className="mt-2 text-[14px] text-lichen">
-          Al ir en vivo se actualiza el sitio y se dispara la automatización de
-          notificaciones (GoHighLevel).
-        </p>
+        {isLive && state.source === "auto" ? (
+          <p className="mt-2 rounded-[8px] border border-cyan/30 bg-cyan/5 px-3 py-2 text-[13px] text-cyan">
+            ● Detección automática activa: el sitio se puso en vivo solo al recibir tu
+            señal desde la switcher (Cloudflare). No necesitas darle GO LIVE. Para
+            terminar, detén el encoder.
+          </p>
+        ) : (
+          <p className="mt-2 text-[14px] text-lichen">
+            Si transmites por Cloudflare, el sitio se pone en vivo <strong>solo</strong>.
+            GO LIVE es para el modo manual (embed de YouTube/Facebook) y para disparar la
+            notificación de GoHighLevel.
+          </p>
+        )}
         <div className="mt-5 flex flex-wrap gap-3">
           <button
             onClick={() => call("/api/admin/go-live", metadata(), "live", "EN VIVO")}
