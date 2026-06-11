@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/logo";
 import { siteConfig } from "@/content/config";
-import { getBroadcastState } from "@/lib/broadcast-state";
+import { getEffectiveBroadcastState } from "@/lib/live-detection";
 
 /**
  * CRT hero — the cool "signal" exception to the dark system.
@@ -10,7 +10,7 @@ import { getBroadcastState } from "@/lib/broadcast-state";
  * "loading signal" state or the LIVE state, driven by the runtime broadcast state.
  */
 export async function Hero() {
-  const state = await getBroadcastState();
+  const state = await getEffectiveBroadcastState();
   const { nextBroadcast } = siteConfig;
   const isLive = state.status === "LIVE";
 

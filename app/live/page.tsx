@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { LivePlayer } from "@/components/live/player";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { siteConfig } from "@/content/config";
-import { getBroadcastState } from "@/lib/broadcast-state";
+import { getEffectiveBroadcastState } from "@/lib/live-detection";
+import { LiveRefresher } from "@/components/live/live-refresher";
 
 export const metadata: Metadata = {
   title: "En vivo",
@@ -14,12 +15,13 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function LivePage() {
-  const state = await getBroadcastState();
+  const state = await getEffectiveBroadcastState();
   const { nextBroadcast } = siteConfig;
   const isLive = state.status === "LIVE";
 
   return (
     <div className="container-page py-12 md:py-16">
+      <LiveRefresher status={state.status} intervalMs={15000} />
       <Eyebrow>{isLive ? "Transmitiendo ahora" : "Canal VERIDIS"}</Eyebrow>
       <h1 className="mt-4 font-display text-[40px] font-medium leading-[1.1] tracking-[-0.02em] text-phosphor">
         {isLive ? state.title : "VERIDIS MEDIA · En vivo"}
