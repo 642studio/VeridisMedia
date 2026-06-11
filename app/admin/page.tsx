@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { AdminDashboard } from "@/components/admin/admin-dashboard";
-import { getBroadcastState } from "@/lib/broadcast-state";
+import { getEffectiveBroadcastState } from "@/lib/live-detection";
 import { getAllEvents } from "@/lib/content";
 import { streamConfig } from "@/lib/cloudflare-stream";
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Admin", robots: { index: false } };
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const state = await getBroadcastState();
+  const state = await getEffectiveBroadcastState();
   const events = getAllEvents().map((e) => ({ slug: e.slug, title: e.title }));
   const stream = {
     configured: streamConfig.configured,
